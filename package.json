@@ -1,0 +1,11 @@
+{
+  "name": "chess.me",
+  "version": "1.0.0",
+  "description": "chess",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Mark-74",
+  "license": "ISC"
+}
