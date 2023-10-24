@@ -75,8 +75,9 @@ let matrix = [ //scacchiera 8*8
 
 showMap();
 
-BlackPawn2.move(2, 4);
-console.log(BlackPawn2.getPosition());
-BlackPawn2.move(2,3)
-console.log(BlackPawn2.getPosition());
 
+console.log(BlackPawn2.move(2, 4));
+console.log(BlackPawn2.move(2, 2));
+
+console.log(WhitePawn1.move(1, 3));
+console.log(WhitePawn1.move(1, 5));

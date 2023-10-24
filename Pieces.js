@@ -1,23 +1,21 @@
-const { matrix } = require('./index.js');
-
-let map = matrix;
-
 class Pieces {
     constructor(piece, colour, x, y){
         this.piece = piece;
         this.colour = colour;
         this.x = x;
         this.y = y;
+        this.moves = 0; //how many times the piece has been moved
     }
-
-    static moves = 0; //how many times the piece has been moved
     
     getPiece(){
-        return 'piece:' + this.piece;
+        return this.piece;
     }
 
     getPosition(){
-        return 'X: ' + this.x + ' Y: ' + this.y;
+        return{
+            x : this.x,
+            y : this.y
+        }
     }
 
     move(targetX, targetY){
@@ -26,25 +24,25 @@ class Pieces {
 
             case "pawn":
 
-                let distance = targetY-this.y;
-                if(distance < 0) distance *= -1; //distance a questo punto è positivo
+                let distance = targetY-this.y; //distance from target Y to actual Y
 
-                if(targetX == this.x && distance < 2 ){ //controllo fattibilità del movimento
+                if(this.colour == "white"){ //contorllo primario mossa
+                    if(distance < 1 || distance > 2) return "not possible";
+                } else {
+                    if(distance <-2 || distance > -1) return "not possible";
+                }
 
-                if(distance == 2 && Pieces.moves != 0){} //controllo doppio primo passo
-                else { //movimento accettato
-
-                    this.y=targetY;
+                if(!((distance == 2 || distance == -2)&& this.moves != 0)){
+                    this.y = targetY;
+                    this.moves++;
 
                     return{
                         newX : this.x,
                         newY : this.y
                         }
-                    }
+                } else return "not possible"
 
-                } else {
-                    return "error"; //segnalare l'errore in modo utile
-                }    
+                
 
             break;
 
