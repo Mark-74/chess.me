@@ -1,3 +1,7 @@
+const { matrix } = require('./index.js');
+
+let map = matrix;
+
 class Pieces {
     constructor(piece, colour, x, y){
         this.piece = piece;
