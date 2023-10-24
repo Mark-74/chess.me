@@ -1,6 +1,7 @@
 class Pieces {
-    constructor(piece, x, y){
+    constructor(piece, colour, x, y){
         this.piece = piece;
+        this.colour = colour;
         this.x = x;
         this.y = y;
     }
