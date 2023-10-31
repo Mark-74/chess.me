@@ -1,5 +1,10 @@
 const Pieces = require('./Pieces.js');
 
+function isEmpty(x, y){
+    if(matrix[x][y] !== "") return false;
+    else return true;
+}
+
 function showMap(){
     for (let i = 0; i<8; i++){
 
@@ -16,6 +21,20 @@ function showMap(){
     }
     
     console.log("\n\n")
+}
+
+function move(piece, x, y){
+    newPosition = piece.move(x, y)
+    if(newPosition !== "not possible" && isEmpty(x, y)){ //movement accepted
+        let oldCoordinates = piece.getPosition();
+        matrix[oldCoordinates.x][oldCoordinates.y] = "";
+        matrix[x][y] = piece;
+    } //controllo re che non sia in scacco
+}
+
+function WhatAtPosition(x, y){
+    if(matrix[x][y] !== "") return matrix[x][y];
+    else return "empty";
 }
 
 
@@ -76,8 +95,11 @@ let matrix = [ //scacchiera 8*8
 showMap();
 
 
-console.log(BlackPawn2.move(2, 4));
+move(BlackPawn2, 2, 4)
+console.log(WhatAtPosition(2, 4));
 console.log(BlackPawn2.move(2, 2));
+
+console.log(isEmpty(2,4));
 
 console.log(WhitePawn1.move(1, 3));
 console.log(WhitePawn1.move(1, 5));
