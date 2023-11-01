@@ -29,7 +29,10 @@ function move(piece, x, y){
         let oldCoordinates = piece.getPosition();
         matrix[oldCoordinates.x][oldCoordinates.y] = "";
         matrix[x][y] = piece;
-    } //controllo re che non sia in scacco
+
+        return "ok";
+    } return "not possible"; 
+    //controllo re che non sia in scacco
 }
 
 function WhatAtPosition(x, y){
@@ -59,7 +62,7 @@ let WhitePawn7 = new Pieces("pawn", "white", 7, 1);
 let WhiteRook0 = new Pieces("rook", "white", 0, 0);
 let WhiteRook7 = new Pieces("rook", "white", 7, 0);
 
-let blackRook0 = new Pieces("rook", "black", 0, 7);
+let BlackRook0 = new Pieces("rook", "black", 0, 7);
 let BlackRook7 = new Pieces("rook", "black", 7, 7);
 
 let WhiteKnight1 = new Pieces("knight", "white", 1, 0);
@@ -71,7 +74,7 @@ let BlackNight6 = new Pieces("knight", "black", 6, 7);
 let WhiteBishop2 = new Pieces("bishop", "white", 2, 0);
 let WhiteBishop5 = new Pieces("bishop", "white", 5, 0);
 
-let Black1Bishop2 = new Pieces("bishop", "black", 2, 7);
+let BlackBishop2 = new Pieces("bishop", "black", 2, 7);
 let BlackBishop5 = new Pieces("bishop", "black", 5, 7);
 
 let WhiteKing = new Pieces("king", "white", 4, 0);
@@ -89,7 +92,7 @@ let matrix = [ //scacchiera 8*8
     [ "" , "" , "" , "" , "" , "" , "" , "" ],
     [ "" , "" , "" , "" , "" , "" , "" , "" ],
     [ BlackPawn0 , BlackPawn1 , BlackPawn2 , BlackPawn3 , BlackPawn4 , BlackPawn5 , BlackPawn6 , BlackPawn7 ],
-    [ blackRook0 , BlackNight1 , Black1Bishop2 , BlackQueen , BlackKing , BlackBishop5 , BlackNight6 , BlackRook7 ]
+    [ BlackRook0 , BlackNight1 , BlackBishop2 , BlackQueen , BlackKing , BlackBishop5 , BlackNight6 , BlackRook7 ]
 ];
 
 showMap();
@@ -103,3 +106,8 @@ console.log(isEmpty(2,4));
 
 console.log(WhitePawn1.move(1, 3));
 console.log(WhitePawn1.move(1, 5));
+
+console.log(move(WhiteBishop2, 3, 1));
+console.log(WhatAtPosition(3,1)); //good move check
+
+console.log(move(BlackBishop2, 2, 6)); //error check
