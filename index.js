@@ -24,14 +24,17 @@ function showMap(){
 }
 
 function move(piece, x, y){
-    newPosition = piece.move(x, y)
-    if(newPosition !== "not possible" && isEmpty(x, y)){ //movement accepted
-        let oldCoordinates = piece.getPosition();
-        matrix[oldCoordinates.x][oldCoordinates.y] = "";
-        matrix[x][y] = piece;
+    if(checkLimits(x,y)){
+        newPosition = piece.move(x, y)
+        if(newPosition !== "not possible" && isEmpty(x, y)){ //movement accepted
+            let oldCoordinates = piece.getPosition();
+            matrix[oldCoordinates.x][oldCoordinates.y] = "";
+            matrix[x][y] = piece;
 
-        return "ok";
-    } return "not possible"; 
+            return "ok";
+        } else return "not possible"; 
+    } else "out of limits";
+    
     //controllo re che non sia in scacco
 }
 
@@ -40,7 +43,11 @@ function WhatAtPosition(x, y){
     else return "empty";
 }
 
-//TODO: funzion che controlli che non si superino i limiti della scacchiera
+function checkLimits(x, y){
+    if((x<0 || x > 7) || (y<0 || y>7)) return false;
+    else return true;
+}
+
 
 
 let BlackPawn0 = new Pieces("pawn", "black", 0, 6);

@@ -18,18 +18,28 @@ class Pieces {
         }
     }
 
-    //TODO: funzion che controlli che non si superino i limiti della scacchiera
-
     move(targetX, targetY){
 
         switch (this.piece){
 
             case "pawn":
 
-                if(targetX != this.x) return "not possible";
-                else{
+                let distance = targetY-this.y; //distance from target Y to actual Y
 
-                    let distance = targetY-this.y; //distance from target Y to actual Y
+                if(targetX != this.x) { //attacking diagonal piece
+                    if(Math.abs(this.x-targetX) == 1 && Math.abs(this.y - targetY) == 1){
+
+                        this.x = targetX;
+                        this.y = targetY;
+                        this.moves++;
+
+                        return{
+                            newX : this.x,
+                            newY : this.y
+                        }
+                    } else return "not possible"
+                }
+                else{
 
                     if(this.colour == "white"){ //contorllo primario mossa
                         if(distance < 1 || distance > 2) return "not possible";
@@ -59,6 +69,7 @@ class Pieces {
 
                         this.y = targetY;
                         this.x = targetX;
+                        this.moves++;
 
                         return{
                             newX : this.x,
@@ -79,6 +90,7 @@ class Pieces {
 
                     this.x = targetX;
                     this.y = targetY;
+                    this.moves++;
 
                     return{
                         newX : this.x,
@@ -97,6 +109,7 @@ class Pieces {
 
                     this.x = targetX;
                     this.y = targetY;
+                    this.moves++;
 
                     return {
                         newX : this.x,
@@ -112,6 +125,7 @@ class Pieces {
 
                     this.x = targetX;
                     this.y = targetY;
+                    this.moves++;
 
                     return{
                         newX : this.x,
@@ -128,6 +142,7 @@ class Pieces {
 
                 this.y = targetY;
                 this.x = targetX;
+                this.moves++;
 
                 return{
                     newX : this.x,
