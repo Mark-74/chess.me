@@ -20,6 +20,8 @@ class Pieces {
 
     move(targetX, targetY){
 
+        let path = [];
+
         switch (this.piece){
 
             case "pawn":
@@ -107,11 +109,34 @@ class Pieces {
 
                 if((this.x == targetX) ^ (this.y == targetY)) {//if the cell is the same error, if both the x and the y changed error, if only one of them changed ok;
 
-                    this.x = targetX;
+                    if(this.y > targetY){
+                        for(let i = 1; i <= this.y - targetY; i++){
+                            let position = [this.x, this.y - i];
+                            path.push(position);
+                        }
+                    } else if(this.y < targetY){
+                        for(i in Range(1, targetY-this.y)){ //TODO: fix range
+                            let position = [this.x, this.y + i];
+                            path.push(position);
+                        }
+                    } else if(this.x > targetX){
+                        for(i in Range(1, this.x-targetX)){
+                            let position = [this.x - i, this.y];
+                            path.push(position);
+                        }
+                    } else {
+                        for(i in Range(1, targetX - this.x)){
+                            let position = [this.x + i, this.y];
+                            path.push(position);
+                        }
+                    }
+
+                    this.x = targetX; //TODO: separate move from update position
                     this.y = targetY;
                     this.moves++;
 
                     return {
+                        path : path,
                         newX : this.x,
                         newY : this.y
                     }
@@ -153,9 +178,6 @@ class Pieces {
 
             break;
         }
-
-        
-
 
     }
 

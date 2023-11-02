@@ -33,7 +33,7 @@ function move(piece, x, y){
 
             return "ok";
         } else return "not possible"; 
-    } else "out of limits";
+    } else return "out of limits";
     
     //controllo re che non sia in scacco
 }
@@ -46,6 +46,10 @@ function WhatAtPosition(x, y){
 function checkLimits(x, y){
     if((x<0 || x > 7) || (y<0 || y>7)) return false;
     else return true;
+}
+
+function checkBetween(piece, ){
+
 }
 
 
@@ -107,7 +111,7 @@ let matrix = [ //scacchiera 8*8
 showMap();
 
 
-move(BlackPawn2, 2, 4)
+move(BlackPawn2, 2, 4);
 console.log(WhatAtPosition(2, 4));
 console.log(BlackPawn2.move(2, 2));
 
@@ -120,3 +124,5 @@ console.log(move(WhiteBishop2, 3, 1));
 console.log(WhatAtPosition(3,1)); //good move check
 
 console.log(move(BlackBishop2, 2, 6)); //error check
+
+console.log(BlackRook0.move(0, 2));
