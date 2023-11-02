@@ -40,6 +40,8 @@ function WhatAtPosition(x, y){
     else return "empty";
 }
 
+//TODO: funzion che controlli che non si superino i limiti della scacchiera
+
 
 let BlackPawn0 = new Pieces("pawn", "black", 0, 6);
 let BlackPawn1 = new Pieces("pawn", "black", 1, 6);

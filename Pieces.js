@@ -73,6 +73,21 @@ class Pieces {
 
             case "knight":
 
+            if(!(this.x == targetX || this.y == targetY)){
+
+                if((Math.abs(this.x - targetX) == 2 && Math.abs(this.y-targetY) == 1) || (Math.abs(this.x - targetX) == 1 && Math.abs(this.y-targetY) == 2)){
+
+                    this.x = targetX;
+                    this.y = targetY;
+
+                    return{
+                        newX : this.x,
+                        newY : this.y
+                    }
+                } else return "not possible";
+
+            } else return "not possible";
+
 
             break;
 
@@ -93,13 +108,33 @@ class Pieces {
 
             case "king":
 
+                if(!((Math.abs(this.x - targetX) > 1 || Math.abs(this.y-targetY) > 1) || (Math.abs(this.x - targetX) == 0 && Math.abs(this.y-targetY) == 0))){
 
+                    this.x = targetX;
+                    this.y = targetY;
+
+                    return{
+                        newX : this.x,
+                        newY : this.y
+                    }
+
+                } else return "not possible"
 
             break;
 
             case "queen":
 
+            if((Math.abs(this.x - targetX) == Math.abs(this.y - targetY)) || ((this.x == targetX) ^ (this.y == targetY))){ //bishop + rook
 
+                this.y = targetY;
+                this.x = targetX;
+
+                return{
+                    newX : this.x,
+                    newY : this.y
+                }
+
+            } else return "not possible";
 
             break;
         }
