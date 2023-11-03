@@ -115,17 +115,17 @@ class Pieces {
                             path.push(position);
                         }
                     } else if(this.y < targetY){
-                        for(i in Range(1, targetY-this.y)){ //TODO: fix range
+                        for(let i = 1; i <= targetY-this.y; i++){
                             let position = [this.x, this.y + i];
                             path.push(position);
                         }
                     } else if(this.x > targetX){
-                        for(i in Range(1, this.x-targetX)){
+                        for(let i = 1; i <= this.x-targetX; i++){
                             let position = [this.x - i, this.y];
                             path.push(position);
                         }
                     } else {
-                        for(i in Range(1, targetX - this.x)){
+                        for(let i = 1; i <= targetX - this.x; i++){
                             let position = [this.x + i, this.y];
                             path.push(position);
                         }
