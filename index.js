@@ -1,8 +1,8 @@
 const Pieces = require('./Pieces.js');
 
 function isEmpty(x, y){
-    if(matrix[x][y] !== "") return false;
-    else return true;
+    if(matrix[y][x] === "") return true;
+    else return false;
 }
 
 function showMap(){
@@ -23,23 +23,33 @@ function showMap(){
     console.log("\n\n")
 }
 
-function move(piece, x, y){
+function move(piece, x, y){ //TODO: update the functions so that you can attack enemy pieces
     if(checkLimits(x,y)){
-        newPosition = piece.move(x, y)
-        if(newPosition !== "not possible" && isEmpty(x, y)){ //movement accepted
+        newPosition = piece.CanMoveTo(x, y)
+        if(newPosition !== "not possible"){ //movement accepted
+
+            newPosition.forEach(element => { //element[1] is y and element[0] is x
+                if(!isEmpty(element[1],element[0])) {
+                    console.log("found something: " + WhatAtPosition(element[1],element[0]) + " at " + element[0] + " " + element[1]);
+                    return "not possible";
+                }
+            });
+            //at this point if there is nothing in between the movement goes on
+
             let oldCoordinates = piece.getPosition();
-            matrix[oldCoordinates.x][oldCoordinates.y] = "";
-            matrix[x][y] = piece;
+            matrix[oldCoordinates.y][oldCoordinates.x] = "";
+            matrix[y][x] = piece;
+            piece.move(x,y); //it's important to update the position of each piece
 
             return "ok";
         } else return "not possible"; 
     } else return "out of limits";
     
-    //controllo re che non sia in scacco
+    //TODO: king check control and checkmate control
 }
 
 function WhatAtPosition(x, y){
-    if(matrix[x][y] !== "") return matrix[x][y];
+    if(!isEmpty(x,y)) return matrix[y][x];
     else return "empty";
 }
 
@@ -48,9 +58,6 @@ function checkLimits(x, y){
     else return true;
 }
 
-function checkBetween(piece, ){
-
-}
 
 
 
@@ -113,16 +120,20 @@ showMap();
 
 move(BlackPawn2, 2, 4);
 console.log(WhatAtPosition(2, 4));
-console.log(BlackPawn2.move(2, 2));
+console.log(move(BlackPawn2, 2, 2));
 
 console.log(isEmpty(2,4));
 
 console.log(WhitePawn1.move(1, 3));
-console.log(WhitePawn1.move(1, 5));
+console.log(WhitePawn1.move(1, 5)); //no checks if you use the internal move function
 
 console.log(move(WhiteBishop2, 3, 1));
 console.log(WhatAtPosition(3,1)); //good move check
 
 console.log(move(BlackBishop2, 2, 6)); //error check
 
-console.log(BlackRook0.move(0, 2));
+console.log(BlackRook0.CanMoveTo(0,2));
+console.log(BlackPawn0.getPosition());
+console.log(WhatAtPosition(0,6)); //TODO: fix this bug, run to find out
+
+console.log(move(BlackRook0, 0, 2));
