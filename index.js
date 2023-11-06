@@ -1,7 +1,7 @@
 const Pieces = require('./Pieces.js');
 
 function isEmpty(x, y){
-    if(matrix[y][x] === "") return true;
+    if(matrix[y][x] == " ") return true;
     else return false;
 }
 
@@ -12,7 +12,7 @@ function showMap(){
     
         for (let j = 0; j<8; j++){
     
-            if(matrix[i][j] != ""){
+            if(matrix[i][j] != " "){
                 row += " " + matrix[i][j].piece;
             } else { row += "blank "; }
             
@@ -29,7 +29,7 @@ function move(piece, x, y){ //TODO: update the functions so that you can attack 
         if(newPosition !== "not possible"){ //movement accepted
 
             newPosition.forEach(element => { //element[1] is y and element[0] is x
-                if(!isEmpty(element[1],element[0])) {
+                if(!(isEmpty(element[1],element[0]))) {
                     console.log("found something: " + WhatAtPosition(element[1],element[0]) + " at " + element[0] + " " + element[1]);
                     return "not possible";
                 }
@@ -37,7 +37,7 @@ function move(piece, x, y){ //TODO: update the functions so that you can attack 
             //at this point if there is nothing in between the movement goes on
 
             let oldCoordinates = piece.getPosition();
-            matrix[oldCoordinates.y][oldCoordinates.x] = "";
+            matrix[oldCoordinates.y][oldCoordinates.x] = " ";
             matrix[y][x] = piece;
             piece.move(x,y); //it's important to update the position of each piece
 
@@ -107,10 +107,10 @@ let BlackQueen = new Pieces("queen", "black", 3, 7);
 let matrix = [ //scacchiera 8*8
     [ WhiteRook0 , WhiteKnight1 , WhiteBishop2 , WhiteQueen , WhiteKing , WhiteBishop5 , WhiteKnight6 , WhiteRook7 ],
     [ WhitePawn0 , WhitePawn1 , WhitePawn2 , WhitePawn3 , WhitePawn4 , WhitePawn5 , WhitePawn6 , WhitePawn7 ],
-    [ "" , "" , "" , "" , "" , "" , "" , "" ],
-    [ "" , "" , "" , "" , "" , "" , "" , "" ],
-    [ "" , "" , "" , "" , "" , "" , "" , "" ],
-    [ "" , "" , "" , "" , "" , "" , "" , "" ],
+    [ " " , " " , " " , " " , " " , " " , " " , " " ],
+    [ " " , " " , " " , " " , " " , " " , " " , " " ],
+    [ " " , " " , " " , " " , " " , " " , " " , " " ],
+    [ " " , " " , " " , " " , " " , " " , " " , " " ],
     [ BlackPawn0 , BlackPawn1 , BlackPawn2 , BlackPawn3 , BlackPawn4 , BlackPawn5 , BlackPawn6 , BlackPawn7 ],
     [ BlackRook0 , BlackNight1 , BlackBishop2 , BlackQueen , BlackKing , BlackBishop5 , BlackNight6 , BlackRook7 ]
 ];
