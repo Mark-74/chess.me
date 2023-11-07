@@ -19,6 +19,17 @@ class Pieces {
     }
 
     move(targetX, targetY){
+        this.x = targetX;
+        this.y = targetY;
+        this.moves++;
+
+        return {
+            newX : this.x,
+            newY : this.y
+        }
+    }
+
+    CanMoveTo(targetX, targetY){
 
         let path = [];
 
@@ -31,14 +42,9 @@ class Pieces {
                 if(targetX != this.x) { //attacking diagonal piece
                     if(Math.abs(this.x-targetX) == 1 && Math.abs(this.y - targetY) == 1){
 
-                        this.x = targetX;
-                        this.y = targetY;
-                        this.moves++;
+                        let position = [targetX, targetY];
+                        path.push(position);
 
-                        return{
-                            newX : this.x,
-                            newY : this.y
-                        }
                     } else return "not possible"
                 }
                 else{
@@ -63,31 +69,16 @@ class Pieces {
                         position = [this.x, this.y + distance] //distance can be -2 or +2 at this point
                         path.push(position);
 
-                        this.y = targetY;
-                        this.moves++;
-
-                        return{
-                            path : path,
-                            newX : this.x,
-                            newY : this.y
-                            }
 
                     } else if (Math.abs(distance) == 1){
                         position = [targetX, targetY];
                         path.push(position);
 
-                        this.y = targetY;
-                        this.moves++;
-
-                        return{
-                            path : path,
-                            newX : this.x,
-                            newY : this.y
-                            }
-
                     } else return "not possible";
 
                 }
+
+                return path;
 
             break;
 
@@ -124,15 +115,7 @@ class Pieces {
                             }
                         }
 
-                        this.y = targetY;
-                        this.x = targetX;
-                        this.moves++;
-
-                        return{
-                            path : path,
-                            newX : this.x,
-                            newY : this.y
-                        }
+                        return path;
 
                     } else return "not possible";
 
@@ -146,14 +129,11 @@ class Pieces {
 
                 if((Math.abs(this.x - targetX) == 2 && Math.abs(this.y-targetY) == 1) || (Math.abs(this.x - targetX) == 1 && Math.abs(this.y-targetY) == 2)){ //doesn't need path because he can jump over pieces
 
-                    this.x = targetX;
-                    this.y = targetY;
-                    this.moves++;
+                    let position = [targetX, targetY];
+                    path.push(position);
 
-                    return{
-                        newX : this.x,
-                        newY : this.y
-                    }
+                    return path;
+
                 } else return "not possible";
 
             } else return "not possible";
@@ -187,15 +167,8 @@ class Pieces {
                         }
                     }
 
-                    this.x = targetX; //TODO: separate move from update position
-                    this.y = targetY;
-                    this.moves++;
+                    return path;
 
-                    return {
-                        path : path,
-                        newX : this.x,
-                        newY : this.y
-                    }
                 } else return "not possible";
 
             break;
@@ -204,16 +177,10 @@ class Pieces {
 
                 if(!((Math.abs(this.x - targetX) > 1 || Math.abs(this.y-targetY) > 1) || (Math.abs(this.x - targetX) == 0 && Math.abs(this.y-targetY) == 0))){
 
-                    //Doesn't need any path because he cannot jump over pieces moving only one square at a time
+                    let position = [targetX, targetY];
+                    path.push(position);
 
-                    this.x = targetX;
-                    this.y = targetY;
-                    this.moves++;
-
-                    return{
-                        newX : this.x,
-                        newY : this.y
-                    }
+                    return path;
 
                 } else return "not possible"
 
@@ -279,14 +246,7 @@ class Pieces {
                     }
                 }
 
-                this.y = targetY;
-                this.x = targetX;
-                this.moves++;
-
-                return{
-                    newX : this.x,
-                    newY : this.y
-                }
+                return path;
 
             } else return "not possible";
 
