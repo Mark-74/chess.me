@@ -1,13 +1,10 @@
 const Pieces = require('./Pieces.js');
 
 function isEmpty(x, y){
-<<<<<<< HEAD
     if(matrix[y][x] == " ") return true;
     else return false;
-=======
     if(matrix[x][y] !== "") return false;
     else return true;
->>>>>>> parent of 57e66db (updated class function "move" and index function "move")
 }
 
 function showMap(){
@@ -30,7 +27,6 @@ function showMap(){
 
 function move(piece, x, y){
     if(checkLimits(x,y)){
-<<<<<<< HEAD
         newPosition = piece.CanMoveTo(x, y)
         if(newPosition !== "not possible"){ //movement accepted
 
@@ -46,13 +42,11 @@ function move(piece, x, y){
             matrix[oldCoordinates.y][oldCoordinates.x] = " ";
             matrix[y][x] = piece;
             piece.move(x,y); //it's important to update the position of each piece
-=======
         newPosition = piece.move(x, y)
         if(newPosition !== "not possible" && isEmpty(x, y)){ //movement accepted
             let oldCoordinates = piece.getPosition();
             matrix[oldCoordinates.x][oldCoordinates.y] = "";
             matrix[x][y] = piece;
->>>>>>> parent of 57e66db (updated class function "move" and index function "move")
 
             return "ok";
         } else return "not possible"; 
