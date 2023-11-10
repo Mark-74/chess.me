@@ -1,7 +1,9 @@
 const Pieces = require('./Pieces.js');
 
 function isEmpty(x, y){
-    if(matrix[y][x] == " ") return true;
+    if(matrix[y][x] == " "){
+        return true;
+    }
     else return false;
 }
 
@@ -29,7 +31,7 @@ function move(piece, x, y){ //TODO: update the functions so that you can attack 
         if(newPosition !== "not possible"){ //movement accepted
 
             newPosition.forEach(element => { //element[1] is y and element[0] is x
-                if(!(isEmpty(element[1],element[0]))) {
+                if(!(isEmpty(element[0],element[1]))) {
                     console.log("found something: " + WhatAtPosition(element[1],element[0]) + " at " + element[0] + " " + element[1]);
                     return "not possible";
                 }
@@ -134,6 +136,6 @@ console.log(move(BlackBishop2, 2, 6)); //error check
 
 console.log(BlackRook0.CanMoveTo(0,2));
 console.log(BlackPawn0.getPosition());
-console.log(WhatAtPosition(0,6)); //TODO: fix this bug, run to find out
+console.log(WhatAtPosition(0,6));
 
-console.log(move(BlackRook0, 0, 2));
+console.log(move(BlackRook0, 0, 2));  //TODO: fix that when it finds something the function stops and does not return "ok"
