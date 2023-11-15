@@ -29,6 +29,134 @@ class Pieces {
         }
     }
 
+    #checkLimits(X, Y){
+        return ((X>7 || X<0) || (Y>7 || Y<0)) ? false : true;
+    }
+
+    possible_Moves(){
+
+        let positions = [];
+
+        switch (this.piece){
+
+            case "pawn":
+
+                if (checkLimits(this.x-1, this.y+1)) positions.push([this.x-1, this.y+1]);
+                if (checkLimits(this.x+1, this.y+1)) positions.push([this.x+1, this.y+1]);
+    
+                return positions;
+
+            break;
+
+            case "bishop":
+
+                for(let i = 0; !checkLimits(this.x+1, this.y+1); i++){
+                    positions.push([this.x+1, this.y+1])
+                }
+
+                for(let i = 0; !checkLimits(this.x-1, this.y+1); i++){
+                    positions.push([this.x-1, this.y+1])
+                }
+
+                for(let i = 0; !checkLimits(this.x+1, this.y-1); i++){
+                    positions.push([this.x+1, this.y-1])
+                }
+
+                for(let i = 0; !checkLimits(this.x-1, this.y-1); i++){
+                    positions.push([this.x-1, this.y-1])
+                }
+
+                return positions;
+
+            break;
+
+            case "knight":
+
+                 if(checkLimits(this.x+2, this.y+1)) positions.push(this.x+2, this.y+1);
+                 if(checkLimits(this.x+2, this.y-1)) positions.push(this.x+2, this.y-1);
+                 if(checkLimits(this.x-2, this.y+1)) positions.push(this.x-2, this.y+1);
+                 if(checkLimits(this.x-2, this.y+1)) positions.push(this.x-2, this.y+1);
+                 if(checkLimits(this.x+1, this.y+2)) positions.push(this.x+1, this.y+2);
+                 if(checkLimits(this.x-1, this.y+2)) positions.push(this.x-1, this.y+2);
+                 if(checkLimits(this.x+1, this.y-2)) positions.push(this.x+1, this.y-2);
+                 if(checkLimits(this.x-1, this.y-2)) positions.push(this.x-1, this.y-2);
+
+                 return positions;
+
+            break;
+
+            case "rook":
+
+                for(let i = 0; checkLimits(this.x + i, this.y); i++){
+                    positions.push([this.x+i, this.y]);
+                }
+
+                for(let i = 0; checkLimits(this.x - i, this.y); i++){
+                    positions.push([this.x-i, this.y]);
+                }
+
+                for(let i = 0; checkLimits(this.y + i, this.y); i++){
+                    positions.push([this.x, this.y+1]);
+                }
+
+                for(let i = 0; checkLimits(this.y - i); i++){
+                    positions.push([this.x, this.y-i]);
+                }
+
+                return positions;
+
+            break;
+
+            case "queen":
+
+
+                //rook
+                for(let i = 0; checkLimits(this.x + i, this.y); i++){
+                    positions.push([this.x+i, this.y]);
+                }
+
+                for(let i = 0; checkLimits(this.x - i, this.y); i++){
+                    positions.push([this.x-i, this.y]);
+                }
+
+                for(let i = 0; checkLimits(this.x , this.y + i); i++){
+                    positions.push([this.x, this.y+1]);
+                }
+
+                for(let i = 0; checkLimits(this.x, this.y - i); i++){
+                    positions.push([this.x, this.y-i]);
+                }
+
+
+                //bishop
+                for(let i = 0; !checkLimits(this.x+1, this.y+1); i++){
+                    positions.push([this.x+1, this.y+1])
+                }
+
+                for(let i = 0; !checkLimits(this.x-1, this.y+1); i++){
+                    positions.push([this.x-1, this.y+1])
+                }
+
+                for(let i = 0; !checkLimits(this.x+1, this.y-1); i++){
+                    positions.push([this.x+1, this.y-1])
+                }
+
+                for(let i = 0; !checkLimits(this.x-1, this.y-1); i++){
+                    positions.push([this.x-1, this.y-1])
+                }
+
+                return positions;
+
+            break;
+
+            case "king":
+
+                if(checkLimits(this.x, this.y+1)) positions.push([this.x, this.y+1]);
+
+            break;
+        }
+    }
+
     CanMoveTo(targetX, targetY){
 
         let path = [];
