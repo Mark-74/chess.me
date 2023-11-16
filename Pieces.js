@@ -152,7 +152,23 @@ class Pieces {
             case "king":
 
                 if(checkLimits(this.x, this.y+1)) positions.push([this.x, this.y+1]);
+                if(checkLimits(this.x+1, this.y+1)) positions.push([this.x+1, this.y+1]);
+                if(checkLimits(this.x+1, this.y)) positions.push([this.x+1, this.y]);
+                if(checkLimits(this.x+1, this.y-1)) positions.push([this.x+1, this.y-1]);
+                if(checkLimits(this.x, this.y-1)) positions.push([this.x, this.y-1]);
+                if(checkLimits(this.x-1, this.y-1)) positions.push([this.x-1, this.y-1]);
+                if(checkLimits(this.x-1, this.y)) positions.push([this.x-1, this.y]);
+                if(checkLimits(this.x+1, this.y+1)) positions.push([this.x+1, this.y+1]);
 
+            break;
+
+            case "pawn":
+
+                if(checkLimits(this.x-1, this.y+1)) positions.push([this.x-1, this.y+1]);
+                if(checkLimits(this.x+1, this.y+1)) positions.push([this.x+1, this.y+1]);
+
+                return positions;
+                
             break;
         }
     }
