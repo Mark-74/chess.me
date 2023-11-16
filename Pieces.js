@@ -5,6 +5,7 @@ class Pieces {
         this.x = x;
         this.y = y;
         this.moves = 0; //how many times the piece has been moved
+        this.possible_Moves = this.update_Possible_Moves(); //initializes the attacking squares
     }
     
     getPiece(){
@@ -33,7 +34,7 @@ class Pieces {
         return ((X>7 || X<0) || (Y>7 || Y<0)) ? false : true;
     }
 
-    possible_Moves(){
+    update_Possible_Moves(){
 
         let positions = [];
 
@@ -108,7 +109,6 @@ class Pieces {
             break;
 
             case "queen":
-
 
                 //rook
                 for(let i = 0; checkLimits(this.x + i, this.y); i++){

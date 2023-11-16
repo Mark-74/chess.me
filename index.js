@@ -60,7 +60,28 @@ function checkLimits(x, y){
     else return true;
 }
 
+function initialize_Attacking_Matrix(ParamMatrix){ //only call this function when initializing the matrixes
+    ParamMatrix.forEach(element => {
 
+        if(element != " "){
+            element.possible_Moves.forEach(position => {
+                ParamMatrix[position[1]][position[0]] = true;
+            });
+        }
+    });
+} 
+
+function update_Possible_Moves(ParamMatrix, movedPiece){
+    movedPiece.possible_Moves.forEach(position => {
+        ParamMatrix[position[1], position[0]] = false;
+    });
+
+    movedPiece.update_Possible_Moves();
+
+    movedPiece.possible_Moves.forEach(position => {
+        ParamMatrix[position[1], position[0]] = true;
+    });
+}
 
 
 let BlackPawn0 = new Pieces("pawn", "black", 0, 6);
@@ -116,6 +137,30 @@ let matrix = [ //scacchiera 8*8
     [ BlackPawn0 , BlackPawn1 , BlackPawn2 , BlackPawn3 , BlackPawn4 , BlackPawn5 , BlackPawn6 , BlackPawn7 ],
     [ BlackRook0 , BlackNight1 , BlackBishop2 , BlackQueen , BlackKing , BlackBishop5 , BlackNight6 , BlackRook7 ]
 ];
+
+let white_Attacking_Squares = [ //where white pieces are attacking
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false]
+];
+
+let black_Attacking_Squares = [ //where white pieces are attacking
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false]
+];
+
+
 
 showMap();
 
