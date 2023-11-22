@@ -30,7 +30,7 @@ class Pieces {
         }
     }
 
-    #checkLimits(X, Y){
+    checkLimits(X, Y){
         return ((X>7 || X<0) || (Y>7 || Y<0)) ? false : true;
     }
 
